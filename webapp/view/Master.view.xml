@@ -1,9 +1,13 @@
-<mvc:View xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui.layout" xmlns:semantic="sap.f.semantic" xmlns:mvc="sap.ui.core.mvc" controllerName="opensap.opensap-ui52-orders.controller.Master">
-
+<mvc:View xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui.layout" xmlns:semantic="sap.f.semantic" xmlns:mvc="sap.ui.core.mvc"
+	controllerName="opensap.opensap-ui52-orders.controller.Master">
 	<semantic:SemanticPage id="masterPage" preserveHeaderStateOnScroll="true" toggleHeaderOnTitleClick="false">
 		<semantic:content>
 			<!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
-			<List id="list" width="auto" class="sapFDynamicPageAlignContent" items="{      path: '/SalesOrderSet',      sorter: {       path: 'CustomerName',       descending: false      },      groupHeaderFactory: '.createGroupHeader'     }" busyIndicatorDelay="{masterView>/delay}" noDataText="{masterView>/noDataText}" mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished" selectionChange=".onSelectionChange">
+			<List id="list" width="auto" class="sapFDynamicPageAlignContent"
+				items="{ path: '/SalesOrderSet', sorter: { path: 'CreatedAt', descending: true }, parameters: {'expand': 'ToBusinessPartner'}, groupHeaderFactory: '.createGroupHeader' }"
+				busyIndicatorDelay="{masterView>/delay}" noDataText="{masterView>/noDataText}"
+				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingScrollToLoad="true"
+				updateFinished=".onUpdateFinished" selectionChange=".onSelectionChange">
 				<infoToolbar>
 					<Toolbar active="true" id="filterBar" visible="{masterView>/isFilterBarVisible}" press=".onOpenViewSettings">
 						<Title id="filterBarLabel" text="{masterView>/filterBarLabel}" level="H3"/>
@@ -23,24 +27,33 @@
 					</OverflowToolbar>
 				</headerToolbar>
 				<items>
-					<ObjectListItem type="Navigation" press=".onSelectionChange" title="{CustomerName}" number="{        path: 'NetAmount',        formatter: '.formatter.currencyValue'       }" numberUnit="{CurrencyCode}">
+					<ObjectListItem type="Navigation" press=".onSelectionChange" title="{CustomerName}"
+						number="{ path: 'NetAmount', formatter: '.formatter.currencyValue' }" numberUnit="{CurrencyCode}">
+						<ObjectAttribute text="{ path: 'CreatedAt', type: 'sap.ui.model.type.Date', formatOptions: { style: 'short' } }"/>
+						<ObjectAttribute text="{ToBusinessPartner/BusinessPartnerID}"/>
+						<firstStatus>
+							<ObjectStatus title="{ToBusinessPartner/Address/Country}" text="{ToBusinessPartner/Address/City}"/>
+						</firstStatus>
+						<markers>
+							<ObjectMarker
+								type="{= ${ToBusinessPartner/Address/Country} === 'MX' &amp;&amp; ${ToBusinessPartner/Address/City} ==='Mexiko City' ? 'Favorite' : 'Flagged' }"/>
+						</markers>
 					</ObjectListItem>
 				</items>
 			</List>
 		</semantic:content>
-	<semantic:headerContent>
-	    <Title xmlns:f="sap.f" xmlns:l="sap.ui.layout" xmlns:semantic="sap.f.semantic" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="masterPageTitle" text="{masterView>/title}" level="H2"/>
-	</semantic:headerContent>
-	<semantic:titleHeading>
-	    <l:HorizontalLayout id="layout0">
-				<f:Avatar
-					src="sap-icon://sap-ui5"
-					displaySize="L"/>
+		<semantic:headerContent>
+			<Title xmlns:f="sap.f" xmlns:l="sap.ui.layout" xmlns:semantic="sap.f.semantic" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+				id="masterPageTitle" text="{masterView>/title}" level="H2"/>
+		</semantic:headerContent>
+		<semantic:titleHeading>
+			<l:HorizontalLayout id="layout0">
+				<f:Avatar src="sap-icon://sap-ui5" displaySize="L"/>
 				<l:VerticalLayout class="sapUiSmallMargin">
 					<Title level="H1" titleStyle="H1" text="UI5 Air Cargo"/>
 					<Text text="You name it, we ship it!"/>
-				</l:VerticalLayout>	        
-	    </l:HorizontalLayout>
-	</semantic:titleHeading>
+				</l:VerticalLayout>
+			</l:HorizontalLayout>
+		</semantic:titleHeading>
 	</semantic:SemanticPage>
 </mvc:View>
