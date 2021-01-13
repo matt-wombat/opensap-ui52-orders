@@ -56,7 +56,10 @@
 				"sap.ui.core": {},
 				"sap.ui.layout": {
 					"minVersion": ""
-				}
+				},
+				"sap.uxap": {},
+				"sap.tnt": {},
+				"sap.suite.ui.commons": {}
 			}
 		},
 		"contentDensities": {
@@ -103,7 +106,7 @@
 				},
 				{
 					"name": "Info",
-					"pattern": "Info",
+					"pattern": "SalesOrderSet/{objectId}/Item/{itemPosition}",
 					"target": [
 						"master",
 						"object",
