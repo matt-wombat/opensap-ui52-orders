@@ -11,7 +11,7 @@ Features of the app:
 * Adding sticky header to the table
 * Adding floating footer to the semantic page
 * Adding dynamic header to the object page layout
-* Adding graphical representation / icon for delivery urgency
+* Adding status indicator for graphical representation of delivery urgency by icon
 * Creating custom controls and embedding into Master-Detail app
 * Extending Flexible Column Layout with custom build create page
 * Validation of user input with regular expressions
