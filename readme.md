@@ -17,3 +17,6 @@ Features of the app:
 * Validation of user input with regular expressions
 * Drag and Drop for deleting items
 
+Prerequisites:
+
+* Destination to ES5 system existing in SCP
